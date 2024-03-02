@@ -1,0 +1,56 @@
+{
+  "id": "1069dde8-13ab-429e-a71a-3c29d4fcc947",
+  "version": "2.0",
+  "name": "Arxiv",
+  "url": "https://arxiv.org/list/cs/recent",
+  "tests": [{
+    "id": "ad54a157-dbef-4f3c-b488-6dcb8043d26c",
+    "name": "Download latest PDF",
+    "commands": [{
+      "id": "4b5a480d-1e6c-49bb-8146-1e360883ba8d",
+      "comment": "Opens the list of most recent Computer Science Papers from the arxiv website",
+      "command": "open",
+      "target": "https://arxiv.org/list/cs/recent",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "64ec50e6-648c-429c-bcc2-5c31558c0d2c",
+      "comment": "Stores the title of the paper to be downloaded",
+      "command": "storeText",
+      "target": "css=dd:nth-child(2) .list-title",
+      "targets": [],
+      "value": "filename"
+    }, {
+      "id": "b3dabfaa-c98c-4d58-8035-c362c8a09de0",
+      "comment": "This JavaScript code selects the latest paper uploaded in 'computer science', retrieves its URL (href) attribute, sets the download attribute to ${filename}, and triggers a click on the anchor element to download the file.",
+      "command": "executeScript",
+      "target": "var link = document.querySelector(\"dt:nth-child(1) a:nth-child(2)\"); var url = link.getAttribute(\"href\"); var filename = ${filename}; link.setAttribute(\"download\", filename); link.click(); ",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1e142f5c-8837-43f4-98a2-a413d2999a89",
+      "comment": "Waits 10 seconds to let the download finish",
+      "command": "pause",
+      "target": "10000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2923866c-c3f8-41d7-9640-84c0747440fe",
+      "comment": "Close the web driver",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "a3011bd6-74c5-4ea9-8318-bffe812584a5",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["ad54a157-dbef-4f3c-b488-6dcb8043d26c"]
+  }],
+  "urls": ["https://arxiv.org/"],
+  "plugins": []
+}
